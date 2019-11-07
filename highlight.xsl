@@ -14,7 +14,7 @@
   <xsl:param name="highlight.source" select="1"/>
 
   <xsl:template match="xslthl:keyword" mode="xslthl">
-    <fo:inline font-weight="bold" color="black"><xsl:apply-templates mode="xslthl"/></fo:inline>
+    <fo:inline color="blue"><xsl:apply-templates mode="xslthl"/></fo:inline>
   </xsl:template>
 
   <xsl:template match="xslthl:string" mode="xslthl">
@@ -22,7 +22,7 @@
   </xsl:template>
 
   <xsl:template match="xslthl:comment" mode="xslthl">
-    <fo:inline font-weight="bold" color="#999999"><xsl:apply-templates mode="xslthl"/></fo:inline>
+    <fo:inline color="#008000"><xsl:apply-templates mode="xslthl"/></fo:inline>
   </xsl:template>
 
   <xsl:template match="xslthl:tag" mode="xslthl">

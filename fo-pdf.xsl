@@ -3,17 +3,14 @@
   Generates a FO document from a DocBook XML document using the DocBook XSL stylesheets.
   See http://docbook.sourceforge.net/release/xsl/1.79.1/doc/fo for all parameters.
 -->
-<xsl:stylesheet version="1.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:db="http://docbook.org/ns/docbook"
-  xmlns:fo="http://www.w3.org/1999/XSL/Format"
-  exclude-result-prefixes="db">
+<xsl:stylesheet version="1.0" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:db="http://docbook.org/ns/docbook" 
+  xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="db">
   <!--
     The absolute URL imports point to system-wide locations by way of this /etc/xml/catalog entry:
   
-      <rewriteURI
-        uriStartString="https://cdn.docbook.org/release/xsl/current"
-        rewritePrefix="file:///usr/share/sgml/docbook/xsl-stylesheets-%docbook-style-xsl-version%"/>
+      <rewriteURI uriStartString="https://cdn.docbook.org/release/xsl/current" rewritePrefix="file:///usr/share/sgml/docbook/xsl-stylesheets-%docbook-style-xsl-version%"/>
   
     %docbook-style-xsl-version% represents the version installed on the system.
   -->
@@ -48,7 +45,7 @@
   -->
 
   <xsl:template name="pickfont-sans">
-    <xsl:text>Arial,sans-serif</xsl:text>
+    <xsl:text>Helvetica,Arial,sans-serif</xsl:text>
   </xsl:template>
 
   <xsl:template name="pickfont-serif">
@@ -76,7 +73,7 @@
   -->
 
   <xsl:param name="body.font.family">
-     <xsl:call-template name="pickfont-sans"/>
+    <xsl:call-template name="pickfont-sans"/>
   </xsl:param>
 
   <xsl:param name="sans.font.family">
@@ -102,7 +99,7 @@
   </xsl:param>
 
   <xsl:param name="title.font.family">
-    <xsl:call-template name="pickfont-serif"/>
+    <xsl:call-template name="pickfont-sans"/>
   </xsl:param>
 
   <!--
@@ -115,17 +112,21 @@
   <xsl:param name="alignment">left</xsl:param>
   -->
   <xsl:param name="alignment">justify</xsl:param>
-  <xsl:param name="body.font.master">12</xsl:param>
+  <xsl:param name="body.font.master">11</xsl:param>
   <xsl:param name="body.font.size">
-    <xsl:value-of select="$body.font.master"/><xsl:text>pt</xsl:text>
+    <xsl:value-of select="$body.font.master"/>
+    <xsl:text>pt</xsl:text>
   </xsl:param>
 
   <xsl:attribute-set name="root.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$text.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$text.color"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <!-- normal.para.spacing is the only attribute set applied to all paragraphs -->
   <xsl:attribute-set name="normal.para.spacing">
+    <xsl:attribute name="text-indent">0pt</xsl:attribute>
     <xsl:attribute name="space-before.optimum">0</xsl:attribute>
     <xsl:attribute name="space-before.minimum">0</xsl:attribute>
     <xsl:attribute name="space-before.maximum">0</xsl:attribute>
@@ -138,14 +139,20 @@
   </xsl:attribute-set>
 
   <xsl:attribute-set name="monospace.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$code.color"/></xsl:attribute>
-    <xsl:attribute name="font-weight"><xsl:value-of select="$code.font-weight"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$code.color"/>
+    </xsl:attribute>
+    <xsl:attribute name="font-weight">
+      <xsl:value-of select="$code.font-weight"/>
+    </xsl:attribute>
     <!--
     <xsl:attribute name="font-size">
       <xsl:value-of select="$body.font.master * 0.9"/><xsl:text>pt</xsl:text>
     </xsl:attribute>
     -->
-    <xsl:attribute name="background-color"><xsl:value-of select="$code.background-color"/></xsl:attribute>
+    <xsl:attribute name="background-color">
+      <xsl:value-of select="$code.background-color"/>
+    </xsl:attribute>
     <xsl:attribute name="padding">
       <xsl:choose>
         <xsl:when test="$code.background-color != 'transparent'">.3em .25em .1em .25em</xsl:when>
@@ -155,7 +162,9 @@
   </xsl:attribute-set>
 
   <xsl:attribute-set name="verbatim.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$text.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$text.color"/>
+    </xsl:attribute>
     <xsl:attribute name="font-weight">normal</xsl:attribute>
     <xsl:attribute name="border-top-style">dotted</xsl:attribute>
     <xsl:attribute name="border-bottom-style">dotted</xsl:attribute>
@@ -175,8 +184,7 @@
     <xsl:attribute name="text-align">start</xsl:attribute>
   </xsl:attribute-set>
 
-  <xsl:attribute-set name="monospace.verbatim.properties"
-                     use-attribute-sets="monospace.properties verbatim.properties">
+  <xsl:attribute-set name="monospace.verbatim.properties" use-attribute-sets="monospace.properties verbatim.properties">
     <!--
     <xsl:attribute name="keep-together.within-column">always</xsl:attribute>
     -->
@@ -217,7 +225,9 @@
       </xsl:choose>
     </xsl:attribute>
     -->
-    <xsl:attribute name="color"><xsl:value-of select="$text.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$text.color"/>
+    </xsl:attribute>
     <!--
     <xsl:attribute name="color">
       <xsl:choose>
@@ -244,28 +254,30 @@
     -->
     <xsl:attribute name="padding">1em .5em .75em .5em</xsl:attribute>
     <!-- make sure block it aligns with block title -->
-    <xsl:attribute name="margin-left"><xsl:value-of select="$title.margin.left"/></xsl:attribute>
+    <xsl:attribute name="margin-left">
+      <xsl:value-of select="$title.margin.left"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <!--
     Page layout
   -->
 
-  <xsl:param name="paper.type">A4</xsl:param> <!-- alternative size is USletter -->
+  <xsl:param name="paper.type">A4</xsl:param>  <!-- alternative size is USletter -->
   <xsl:param name="headers.on.blank.pages">1</xsl:param>
   <xsl:param name="footers.on.blank.pages">1</xsl:param>
-  <xsl:param name="page.margin.top">10mm</xsl:param> <!-- top margin of page -->
-  <xsl:param name="page.margin.bottom">10mm</xsl:param> <!-- top margin of page -->
-  <xsl:param name="page.margin.inner">20mm</xsl:param> <!-- side margin of page (left, towards binding) -->
-  <xsl:param name="page.margin.outer">20mm</xsl:param> <!-- side margin of page (right, away from binding) -->
-  <xsl:param name="body.margin.top">15mm</xsl:param> <!-- top margin of content -->
-  <xsl:param name="body.margin.bottom">15mm</xsl:param> <!-- bottom margin of content -->
-  <xsl:param name="body.margin.inner">4mm</xsl:param> <!-- side margin of content (left, towards binding) -->
-  <xsl:param name="body.margin.outer">6mm</xsl:param> <!-- side margin of content (right, away from binding) -->
-  <xsl:param name="body.start.indent">0</xsl:param> <!-- text indentation -->
-  <xsl:param name="body.end.indent">0</xsl:param> <!-- text recess from right -->
-  <xsl:param name="region.before.extent">10mm</xsl:param> <!-- height of page header -->
-  <xsl:param name="region.after.extent">10mm</xsl:param> <!-- height of page footer -->
+  <xsl:param name="page.margin.top">15mm</xsl:param>  <!-- top margin of page -->
+  <xsl:param name="page.margin.bottom">15mm</xsl:param>  <!-- top margin of page -->
+  <xsl:param name="page.margin.inner">15mm</xsl:param>  <!-- side margin of page (left, towards binding) -->
+  <xsl:param name="page.margin.outer">15mm</xsl:param>  <!-- side margin of page (right, away from binding) -->
+  <xsl:param name="body.margin.top">15mm</xsl:param>  <!-- top margin of content -->
+  <xsl:param name="body.margin.bottom">15mm</xsl:param>  <!-- bottom margin of content -->
+  <xsl:param name="body.margin.inner">0mm</xsl:param>  <!-- side margin of content (left, towards binding) -->
+  <xsl:param name="body.margin.outer">0mm</xsl:param>  <!-- side margin of content (right, away from binding) -->
+  <xsl:param name="body.start.indent">0</xsl:param>  <!-- text indentation -->
+  <xsl:param name="body.end.indent">0</xsl:param>  <!-- text recess from right -->
+  <xsl:param name="region.before.extent">10mm</xsl:param>  <!-- height of page header -->
+  <xsl:param name="region.after.extent">10mm</xsl:param>  <!-- height of page footer -->
   <xsl:param name="header.column.widths">1 5 1</xsl:param>
 
   <!--
@@ -284,10 +296,9 @@
       <xsl:apply-templates select="." mode="label.markup"/>
     </xsl:variable>
 
-    <fo:block text-align-last="justify" end-indent="{$toc.indent.width}pt"
-              last-line-end-indent="-{$toc.indent.width}pt">
+    <fo:block text-align-last="justify" end-indent="{$toc.indent.width}pt" last-line-end-indent="-{$toc.indent.width}pt">
       <fo:inline keep-with-next.within-line="always">
-        <fo:basic-link internal-destination="{$id}" color="#005498">
+        <fo:basic-link internal-destination="{$id}" color="#000000">
           <!-- Chapter titles should be bold. -->
           <!--
           <xsl:choose>
@@ -307,13 +318,11 @@
         </fo:basic-link>
       </fo:inline>
       <fo:inline keep-together.within-line="always">
-        <xsl:text> </xsl:text>
-        <fo:leader leader-pattern="dots" leader-pattern-width="3pt"
-                   leader-alignment="reference-area"
-                   keep-with-next.within-line="always"/>
-          <xsl:text> </xsl:text>
-          <fo:basic-link internal-destination="{$id}" color="#005498">
-            <fo:page-number-citation ref-id="{$id}"/>
+        <xsl:text></xsl:text>
+        <fo:leader leader-pattern="dots" leader-pattern-width="3pt" leader-alignment="reference-area" keep-with-next.within-line="always"/>
+        <xsl:text></xsl:text>
+        <fo:basic-link internal-destination="{$id}" color="#000000">
+          <fo:page-number-citation ref-id="{$id}"/>
         </fo:basic-link>
       </fo:inline>
     </fo:block>
@@ -341,7 +350,9 @@
   </xsl:param>
 
   <xsl:attribute-set name="formal.title.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$caption.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$caption.color"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:template match="*" mode="admon.graphic.width">
@@ -353,7 +364,9 @@
     <xsl:attribute name="padding-left">18pt</xsl:attribute>
     <xsl:attribute name="border-left-width">.75pt</xsl:attribute>
     <xsl:attribute name="border-left-style">solid</xsl:attribute>
-    <xsl:attribute name="border-left-color"><xsl:value-of select="$border.color"/></xsl:attribute>
+    <xsl:attribute name="border-left-color">
+      <xsl:value-of select="$border.color"/>
+    </xsl:attribute>
     <xsl:attribute name="margin-left">0</xsl:attribute>
   </xsl:attribute-set>
 
@@ -384,16 +397,24 @@
     <xsl:attribute name="padding-top">18pt</xsl:attribute>
     <xsl:attribute name="padding-bottom">0</xsl:attribute>
   </xsl:attribute-set>
- 
+
   <xsl:attribute-set name="sidebar.title.properties">
-    <xsl:attribute name="font-family"><xsl:value-of select="$title.fontset"/></xsl:attribute>
-    <xsl:attribute name="font-weight"><xsl:value-of select="$header.font-weight"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$caption.color"/></xsl:attribute>
+    <xsl:attribute name="font-family">
+      <xsl:value-of select="$title.fontset"/>
+    </xsl:attribute>
+    <xsl:attribute name="font-weight">
+      <xsl:value-of select="$header.font-weight"/>
+    </xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$caption.color"/>
+    </xsl:attribute>
     <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 1.6"/><xsl:text>pt</xsl:text>
+      <xsl:value-of select="$body.font.master * 1.6"/>
+      <xsl:text>pt</xsl:text>
     </xsl:attribute>
     <xsl:attribute name="margin-bottom">
-      <xsl:value-of select="$body.font.master"/><xsl:text>pt</xsl:text>
+      <xsl:value-of select="$body.font.master"/>
+      <xsl:text>pt</xsl:text>
     </xsl:attribute>
   </xsl:attribute-set>
 
@@ -479,9 +500,9 @@
 
     <xsl:variable name="content-type">
       <xsl:if test="@format">
-         <xsl:call-template name="graphic.format.content-type">
-           <xsl:with-param name="format" select="@format"/>
-         </xsl:call-template>
+        <xsl:call-template name="graphic.format.content-type">
+          <xsl:with-param name="format" select="@format"/>
+        </xsl:call-template>
       </xsl:if>
     </xsl:variable>
 
@@ -572,12 +593,12 @@
         <xsl:choose>
           <xsl:when test="$ignore.image.scaling != 0">auto</xsl:when>
           <xsl:when test="contains(@contentdepth,'%')">
-             <xsl:value-of select="@contentdepth"/>
+            <xsl:value-of select="@contentdepth"/>
           </xsl:when>
           <xsl:when test="@contentdepth">
-             <xsl:call-template name="length-spec">
-               <xsl:with-param name="length" select="@contentdepth"/>
-               <xsl:with-param name="default.units" select="'px'"/>
+            <xsl:call-template name="length-spec">
+              <xsl:with-param name="length" select="@contentdepth"/>
+              <xsl:with-param name="default.units" select="'px'"/>
             </xsl:call-template>
           </xsl:when>
           <xsl:when test="number($scale) != 1.0">
@@ -624,9 +645,12 @@
     Math
   -->
 
-  <xsl:template match="mml:math" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <xsl:template match="mml:math" 
+    xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <fo:instream-foreign-object>
-      <xsl:attribute name="font-family"><xsl:value-of select="$math.font.family"/></xsl:attribute>
+      <xsl:attribute name="font-family">
+        <xsl:value-of select="$math.font.family"/>
+      </xsl:attribute>
       <xsl:copy>
         <xsl:copy-of select="@*"/>
         <xsl:apply-templates/>
@@ -638,10 +662,19 @@
     Titles
   -->
 
+  <xsl:param name="section.autolabel">1</xsl:param>
+  <xsl:param name="section.autolabel.max.depth">6</xsl:param>
+
   <xsl:attribute-set name="section.title.properties">
-    <xsl:attribute name="font-family"><xsl:value-of select="$title.fontset"/></xsl:attribute>
-    <xsl:attribute name="font-weight"><xsl:value-of select="$header.font-weight"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$title.color"/></xsl:attribute>
+    <xsl:attribute name="font-family">
+      <xsl:value-of select="$title.fontset"/>
+    </xsl:attribute>
+    <xsl:attribute name="font-weight">
+      <xsl:value-of select="$header.font-weight"/>
+    </xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$title.color"/>
+    </xsl:attribute>
     <!-- font size is calculated dynamically by section.heading template -->
     <xsl:attribute name="keep-with-next.within-column">always</xsl:attribute>
     <xsl:attribute name="space-before.minimum">0.8em</xsl:attribute>
@@ -652,44 +685,45 @@
     <xsl:attribute name="space-after.maximum">1.2em</xsl:attribute>
     <xsl:attribute name="text-align">left</xsl:attribute>
     <!-- make sure block it aligns with block title -->
-    <xsl:attribute name="start-indent"><xsl:value-of select="$title.margin.left"/></xsl:attribute>
+    <xsl:attribute name="start-indent">
+      <xsl:value-of select="$title.margin.left"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="section.title.level1.properties">
+    <xsl:attribute name="text-transform">uppercase</xsl:attribute>
+    <xsl:attribute name="font-weight">bold</xsl:attribute>
+    <xsl:attribute name="font-stretch">condensed</xsl:attribute>
     <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 1.6"/><xsl:text>pt</xsl:text>
+      <xsl:value-of select="$body.font.master * 1.4"></xsl:value-of>
+      <xsl:text>pt</xsl:text>
     </xsl:attribute>
+
+    <xsl:attribute name="border-bottom">1.5pt solid #C0C0C0</xsl:attribute>
   </xsl:attribute-set>
 
-  <xsl:attribute-set name="section.title.level2.properties">
-    <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 1.4"/><xsl:text>pt</xsl:text>
-    </xsl:attribute>
+  <xsl:attribute-set name="section.title.level2.properties" use-attribute-sets="section.title.level1.properties">
+    <xsl:attribute name="text-transform">none</xsl:attribute>
+    <xsl:attribute name="border-bottom-width">0pt</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="section.title.level3.properties">
     <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 1.3"/><xsl:text>pt</xsl:text>
+      <xsl:value-of select="$body.font.master * 1.2"/>
+      <xsl:text>pt</xsl:text>
     </xsl:attribute>
   </xsl:attribute-set>
 
-  <xsl:attribute-set name="section.title.level4.properties">
+  <xsl:attribute-set name="section.title.level4.properties" use-attribute-sets="section.title.level3.properties"/>
+
+  <xsl:attribute-set name="section.title.level5.properties" use-attribute-sets="section.title.level4.properties">
     <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 1.2"/><xsl:text>pt</xsl:text>
+      <xsl:value-of select="$body.font.master"></xsl:value-of>
+      <xsl:text>pt</xsl:text>
     </xsl:attribute>
   </xsl:attribute-set>
 
-  <xsl:attribute-set name="section.title.level5.properties">
-    <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 1.1"/><xsl:text>pt</xsl:text>
-    </xsl:attribute>
-  </xsl:attribute-set>
-
-  <xsl:attribute-set name="section.title.level6.properties">
-    <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master"/><xsl:text>pt</xsl:text>
-    </xsl:attribute>
-  </xsl:attribute-set>
+  <xsl:attribute-set name="section.title.level6.properties" use-attribute-sets="section.title.level5.properties"/>
 
   <xsl:attribute-set name="component.title.properties">
     <xsl:attribute name="keep-with-next.within-column">always</xsl:attribute>
@@ -712,9 +746,13 @@
       <xsl:value-of select="concat($body.font.master, 'pt')"/>
     </xsl:attribute>
     <xsl:attribute name="hyphenate">false</xsl:attribute>
-    <xsl:attribute name="font-weight"><xsl:value-of select="$header.font-weight"/></xsl:attribute>
+    <xsl:attribute name="font-weight">
+      <xsl:value-of select="$header.font-weight"/>
+    </xsl:attribute>
     <!-- color support on fo:block, to which this gets applied, added in DocBook XSL 1.78.1 -->
-    <xsl:attribute name="color"><xsl:value-of select="$title.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$title.color"/>
+    </xsl:attribute>
     <!--
     <xsl:attribute name="color">
       <xsl:choose>
@@ -736,6 +774,18 @@
     </xsl:attribute>
   </xsl:attribute-set>
 
+  <xsl:template name="table.of.contents.titlepage" priority="1">
+    <fo:block break-before="page"/>
+    <fo:block xsl:use-attribute-sets="section.title.level1.properties"
+              space-before="1em"
+              space-before.conditionality="retain"
+              space-after="1.2em">
+      <xsl:call-template name="gentext">
+        <xsl:with-param name="key" select="'TableofContents'"/>
+      </xsl:call-template>
+    </fo:block>
+  </xsl:template>
+
   <!-- override to set color and move to separate line -->
   <xsl:template match="db:formalpara/db:title | formalpara/title">
     <xsl:variable name="titleStr">
@@ -746,7 +796,7 @@
         <xsl:value-of select="substring($titleStr,string-length($titleStr),1)"/>
       </xsl:if>
     </xsl:variable>
-  
+
     <xsl:if test="$runinhead.default.title.break.after = '1'">
       <fo:block font-weight="bold" color="{$caption.color}">
         <xsl:copy-of select="$titleStr"/>
@@ -756,10 +806,7 @@
       </fo:block>
     </xsl:if>
     <xsl:if test="not($runinhead.default.title.break.after = '1')">
-      <fo:inline font-weight="bold"
-                 color="{$caption.color}"
-                 keep-with-next.within-line="always"
-                 padding-end="1em">
+      <fo:inline font-weight="bold" color="{$caption.color}" keep-with-next.within-line="always" padding-end="1em">
         <xsl:copy-of select="$titleStr"/>
         <xsl:if test="$lastChar != '' and not(contains($runinhead.title.end.punct, $lastChar))">
           <xsl:value-of select="$runinhead.default.title.end.punct"/>
@@ -774,11 +821,15 @@
   -->
 
   <xsl:attribute-set name="xref.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$link.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$link.color"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="simple.xlink.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$link.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$link.color"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <!--
@@ -808,12 +859,12 @@
   </xsl:attribute-set>
 
   <xsl:attribute-set name="variablelist.term.properties">
-    <xsl:attribute name="font-weight">bold</xsl:attribute> 
+    <xsl:attribute name="font-weight">bold</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:template name="itemizedlist.label.markup">
     <xsl:param name="itemsymbol" select="'disc'"/>
-  
+
     <xsl:choose>
       <xsl:when test="$itemsymbol='none'"></xsl:when>
       <xsl:when test="$itemsymbol='circle'">&#x25E6;</xsl:when>
@@ -853,15 +904,21 @@
   -->
 
   <xsl:attribute-set name="book.titlepage.recto.style">
-    <xsl:attribute name="font-family"><xsl:value-of select="$title.fontset"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$titlepage.color"/></xsl:attribute>
+    <xsl:attribute name="font-family">
+      <xsl:value-of select="$title.fontset"/>
+    </xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$titlepage.color"/>
+    </xsl:attribute>
     <xsl:attribute name="font-weight">normal</xsl:attribute>
     <xsl:attribute name="font-size">12pt</xsl:attribute>
     <xsl:attribute name="text-align">center</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="chapter.titlepage.recto.style">
-    <xsl:attribute name="color"><xsl:value-of select="$chapter.title.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$chapter.title.color"/>
+    </xsl:attribute>
     <xsl:attribute name="background-color">white</xsl:attribute>
     <xsl:attribute name="font-size">24pt</xsl:attribute>
     <xsl:attribute name="font-weight">normal</xsl:attribute>
@@ -874,11 +931,15 @@
   </xsl:attribute-set>
 
   <xsl:attribute-set name="preface.titlepage.recto.style" use-attribute-sets="chapter.titlepage.recto.style">
-    <xsl:attribute name="font-family"><xsl:value-of select="$title.fontset"/></xsl:attribute>
+    <xsl:attribute name="font-family">
+      <xsl:value-of select="$title.fontset"/>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="part.titlepage.recto.style">
-    <xsl:attribute name="color"><xsl:value-of select="$title.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$title.color"/>
+    </xsl:attribute>
     <xsl:attribute name="text-align">center</xsl:attribute>
   </xsl:attribute-set>
 
@@ -887,7 +948,9 @@
     <fo:block xsl:use-attribute-sets="book.titlepage.recto.style" text-align="center" font-size="24.8832pt" space-before="18.6624pt">
       <!-- FIXME don't use hardcoded value here -->
       <xsl:attribute name="color">black</xsl:attribute>
-      <xsl:attribute name="font-weight"><xsl:value-of select="$header.font-weight"/></xsl:attribute>
+      <xsl:attribute name="font-weight">
+        <xsl:value-of select="$header.font-weight"/>
+      </xsl:attribute>
       <xsl:call-template name="division.title">
         <xsl:with-param name="node" select="ancestor-or-self::db:book[1] | ancestor-or-self::book[1]"/>
       </xsl:call-template>
@@ -899,12 +962,12 @@
     <fo:block xsl:use-attribute-sets="book.titlepage.recto.style" text-align="center" font-size="14.4pt" space-before="1in" font-family="{$title.fontset}">
       <xsl:call-template name="gentext">
         <xsl:with-param name="key" select="'Revision'"/>
-      </xsl:call-template> 
+      </xsl:call-template>
       <xsl:call-template name="gentext.space"/>
       <xsl:apply-templates select="db:revnumber | revnumber" mode="titlepage.mode"/>
     </fo:block>
     <fo:block xsl:use-attribute-sets="book.titlepage.recto.style" text-align="center" font-size="14.4pt" font-family="{$title.fontset}">
-      <xsl:apply-templates select="db:date | date" mode="titlepage.mode"/> 
+      <xsl:apply-templates select="db:date | date" mode="titlepage.mode"/>
     </fo:block>
   </xsl:template>
 
@@ -965,28 +1028,38 @@
   <xsl:param name="footnote.number.symbols"/>
 
   <xsl:param name="footnote.font.size">
-    <xsl:value-of select="$body.font.master * 0.8"/><xsl:text>pt</xsl:text>
+    <xsl:value-of select="$body.font.master * 0.8"/>
+    <xsl:text>pt</xsl:text>
   </xsl:param>
 
   <xsl:attribute-set name="footnote.mark.properties">
     <!-- override font-family for mark since we don't need full font set -->
-    <xsl:attribute name="font-family"><xsl:value-of select="$body.font.family"/></xsl:attribute>
-    <xsl:attribute name="font-size">
-      <xsl:value-of select="$body.font.master * 0.8"/><xsl:text>pt</xsl:text>
+    <xsl:attribute name="font-family">
+      <xsl:value-of select="$body.font.family"/>
     </xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$link.color"/></xsl:attribute>
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 0.8"/>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$link.color"/>
+    </xsl:attribute>
     <xsl:attribute name="font-weight">bold</xsl:attribute>
     <xsl:attribute name="padding">0 1pt</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="footnote.properties">
     <!-- force color since it will otherwise inherit from location of footnote text -->
-    <xsl:attribute name="color"><xsl:value-of select="$text.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$text.color"/>
+    </xsl:attribute>
     <xsl:attribute name="text-align">left</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="footnote.sep.leader.properties">
-    <xsl:attribute name="color"><xsl:value-of select="$border.color"/></xsl:attribute>
+    <xsl:attribute name="color">
+      <xsl:value-of select="$border.color"/>
+    </xsl:attribute>
     <xsl:attribute name="leader-pattern">rule</xsl:attribute>
     <xsl:attribute name="leader-length">2in</xsl:attribute>
     <xsl:attribute name="rule-thickness">0.5pt</xsl:attribute>

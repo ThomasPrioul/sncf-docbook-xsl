@@ -6,11 +6,11 @@
   <xsl:param name="text.color">#222222</xsl:param>
   <xsl:param name="link.color">#005498</xsl:param>
   <xsl:param name="border.color">#DDDDDD</xsl:param>
-  <xsl:param name="header.font-weight">normal</xsl:param>
-  <xsl:param name="title.color">#BA3925</xsl:param>
+  <xsl:param name="header.font-weight">bold</xsl:param>
+  <xsl:param name="title.color">#222222</xsl:param>
   <xsl:param name="chapter.title.color" select="$title.color"/>
   <xsl:param name="section.title.color" select="$title.color"/>
-  <xsl:param name="caption.color">#7A2518</xsl:param>
+  <xsl:param name="caption.color">#333333</xsl:param>
   <xsl:param name="code.color" select="$text.color"/>
   <xsl:param name="code.font-weight">normal</xsl:param>
   <xsl:param name="code.background-color">#EEEEEE</xsl:param>
